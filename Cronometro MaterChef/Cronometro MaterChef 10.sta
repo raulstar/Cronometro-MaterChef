@@ -1,0 +1,51 @@
+
+ROM used: 584 (7%)
+          584 (7%) including unused fragments
+
+          1 Average locations per line
+          3 Average locations per statement
+
+RAM used: 34 (9%) at main() level
+          34 (9%) worst case
+
+Stack used: 3 worst case (out of 7 total available)
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+  317   216 100  Cronometro MaterChef 10.c
+  312     0   0  ..\..\..\..\..\..\Program Files (x86)\PICC\devices\16f877a.h
+----- -----
+  629   216 Total
+
+Page ROM  %  RAM   Vol Diff  Functions:
+---- --- --- ---   --- ----  ----------
+0     21   4   1             @delay_ms1
+0     59  10   1   825  3.9  zera
+0     39   7   0   323  3.3  reverso
+0     22   4   0   183  4.0  TIMER1_isr
+0     60  10   0   687  5.4  TIMER2_isr
+0    321  55   2  4321  6.9  MAIN
+
+Program metrics:
+    Functions               5
+    Statements              216
+    Comments                195
+    Volume (V)              7858
+    Difficilty (D)          23.9
+    Effort to implement (E) 187790
+    Time to implement (T)   2 hours, 54 minutes
+    Est Delivered Bugs (B)  1
+    Cyclomatic Complexity   26
+    Maintainability (MI)    58
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00003     4  0  
+00004-0003D    58  0  
+0003E-007FF   522  1464  
+00800-00FFF     0  2048  
+01000-017FF     0  2048  
+01800-01FFF     0  2048  
+
+
+

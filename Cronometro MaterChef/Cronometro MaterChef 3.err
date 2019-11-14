@@ -1,0 +1,3 @@
+>>> Warning 216 "Cronometro MaterChef 3.c" Line 224(0,1): Interrupts disabled during call to prevent re-entrancy:  (zera)
+      Memory usage:   ROM=5%      RAM=7% - 7%
+      0 Errors,  1 Warnings.

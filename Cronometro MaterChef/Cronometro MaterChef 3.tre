@@ -1,0 +1,10 @@
+ÀÄCronometro MaterChef 3
+   ÃÄMAIN  0/201  Ram=1
+   ³  ÃÄ??0??
+   ³  ÃÄ@delay_ms1  0/21  Ram=1
+   ³  ÃÄ@delay_ms1  0/21  Ram=1
+   ³  ÃÄ@delay_ms1  0/21  Ram=1
+   ³  ÀÄzera  0/65  Ram=1
+   ÃÄSinal  0/22  Ram=0
+   ³  ÀÄzera  0/65  Ram=1
+   ÀÄTIMER2_isr  0/60  Ram=0

@@ -1,0 +1,324 @@
+/*******************************************************************************
+*              
+*                             Auto Robotica
+*
+* Cronometro Master Chef:   Marco de 2019                                Raul S F
+********************************************************************************
+********************************************************************************
+* Historico
+* Revisao 
+* Revisao 
+* Revisao 
+********************************************************************************
+*/
+
+#include <16f877a.h>
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+* Configurações para gravação *
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+#FUSES WDT, HS, PUT, NOPROTECT, NODEBUG, NOBROWNOUT, NOLVP, NOCPD
+#use delay(clock=4000000)
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+* Definição e inicialização dos port's *'
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+#use fast_io(a)
+#use standard_io(b)
+#use fast_io(c)
+#use fast_io(d)
+//#use fast_io(b)
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+* Definição e inicialização das variáveis *
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+long int tempo=0;
+int cont=0;
+int sensor1=0;
+int sensor2=0;
+int start=0;
+int direcao=0;
+int teste=0;
+int rev=0;
+long int aux=0;
+int pisca=0;
+int f_pisca=0; 
+int pausa=0;
+
+Void zera(){
+   output_low(pin_c0);//led 60
+   output_low(pin_c1);//led 120
+   output_low(pin_c2);//led 180
+   output_high(pin_d1);//direcao 1
+   output_high(pin_d3);//direção 
+   if(input(pin_b0)==0){
+   sensor1=1;
+   }
+   if(input(pin_b1)==0){
+   sensor2=1;
+   }
+   
+while((sensor1==1)||(sensor2==1)){
+   if(sensor1==1){
+   restart_wdt();
+   output_high(pin_d0);//habilita drive
+   output_high(pin_d2);//pulso motor1
+   delay_ms(2);
+   output_low(pin_d2);//pulso motor1 
+   delay_ms(2);    
+      if(input(pin_b0)==1)sensor1=0;
+      }
+         if(sensor2==1){
+         output_high(pin_d0);//habilita drive
+         output_high(pin_d4);//pulso motor2
+         delay_ms(2);
+         output_low(pin_d4);//pulso motor2
+         delay_ms(2);      
+            if(input(pin_b1)==1)sensor2=0;
+      }
+   }
+}
+
+void reverso(){
+//1,8°/3600=
+aux=tempo*2;
+
+   while(aux>0){
+   restart_wdt();
+   aux--;   
+   output_high(pin_d2);//pulso motor1
+   delay_ms(2);
+   output_low(pin_d2);//pulso motor1 
+   delay_ms(2);
+         
+   output_high(pin_d0);//habilita drive
+   output_high(pin_d4);//pulso motor2
+   delay_ms(2);
+   output_low(pin_d4);//pulso motor2
+   delay_ms(2);
+   }
+   cont=0;
+   rev=1;
+}
+
+ #int_TIMER1
+ void  TIMER1_isr(void){
+ restart_wdt();
+   pisca++;
+      if(pisca==1){
+      pisca=0;
+      f_pisca=!f_pisca;
+      if(f_pisca==0){
+      output_low(pin_c3);//led start
+      }
+      else output_high(pin_c3);//led start
+      }
+ }
+
+#int_TIMER2
+void  TIMER2_isr(void){
+static long acumulador=69;//33=estouro 4,5s
+static int i=0;
+   
+restart_wdt();
+   if(tempo!=0){   
+      if(acumulador>0){
+      acumulador--;
+      }
+      else{
+      tempo--;
+      acumulador=69;
+         if(i==0){
+         output_high(pin_d2); //pulso motor1
+         output_high(pin_d4);
+         i=1;
+         teste++;
+         }
+         else{
+         output_low(pin_d2); //pulso motor1
+         output_low(pin_d4);
+         i=0;
+         }
+         }
+      
+   }
+   else{
+   cont=0;
+   disable_interrupts(INT_TIMER2);
+   output_low(pin_e0);//led 15
+   output_low(pin_e1);//led 30
+   output_low(pin_e2);//led 45
+   output_low(pin_c0);//led 60
+   output_low(pin_c1);//led 120
+   output_low(pin_c2);//led 180
+   output_low(pin_c3);//led start
+   
+   }
+}
+
+//360°/1,8º=200 passos p volta
+//motor 200 passo/rev
+
+void main(void) {
+//   setup_timer_0(RTCC_INTERNAL|RTCC_DIV_1);
+//   setup_wdt(WDT_1152MS);
+   setup_timer_2(T2_DIV_BY_16,255,16);//65,5ms
+   setup_timer_1(T1_INTERNAL|T1_DIV_BY_8);
+   disable_interrupts(INT_TIMER1);
+   disable_interrupts(INT_TIMER2);
+   disable_interrupts(INT_EXT);;
+   disable_interrupts(INT_CCP1);
+   setup_comparator(NC_NC_NC_NC);
+   setup_vref(FALSE);
+   set_tris_a(0b11111111);
+   set_tris_b(0b11000111);
+   set_tris_c(0b11110000);
+   set_tris_d(0b00000000);
+   set_tris_e(0b00000000);
+   output_low(pin_e0);
+   output_low(pin_e1);//led 30
+   output_low(pin_e2);//led 45
+   output_low(pin_d0);//habilita drive
+   output_low(pin_c0);//led 60
+   output_low(pin_c1);//led 120
+   output_low(pin_c2);//led 180
+   output_low(pin_c3);//led start
+   enable_interrupts(GLOBAL);
+   
+   zera();
+   output_high(pin_d0);//habilita drive
+   
+   /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+   * Loop principal *
+   * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+      while(TRUE){
+      restart_wdt();
+         if((input(pin_a0)==1)){//15 minutos
+         tempo=50;//=15 minutos
+         output_high(pin_e0);//led 15
+         cont=1;
+         }
+         
+         if((input(pin_a1)==1)){//30 minutos
+         tempo=100;//=30 minutos
+         output_high(pin_e1);//led 30
+         cont=1;
+         }
+         
+         if((input(pin_a2)==1)){//45 minutos
+         tempo=150;//=45 minutos
+         output_high(pin_e2);//led 45
+         cont=1;
+         }
+         
+         if((input(pin_a3)==1)){//60... minutos
+            static int acum=0;
+            if(acum==3){
+            acum=0;
+            }
+            
+            if(acum==2){
+            tempo=600;//=180 minutos
+            acum=3;
+            output_low(pin_c0);//led 60
+            output_low(pin_c1);//led 120
+            output_high(pin_c2);//led 180
+            delay_ms(400);
+            cont=1;
+            }
+        
+            if(acum==1){
+            tempo=400;//=120 minutos
+            acum=2;
+            output_low(pin_c0);//led 60
+            output_high(pin_c1);//led 120
+            output_low(pin_c2);//led 180
+            delay_ms(400);
+            cont=1;
+            }
+            
+            if(acum==0){
+            tempo=200;//=60 minutos
+            acum=1;
+            output_high(pin_c0);//led 60
+            output_low(pin_c1);//led 120
+            output_low(pin_c2);//led 180     
+            delay_ms(400);
+            cont=1;
+            }
+            
+         }
+         
+         if((input(pin_a4)==1)&&((cont==1)||(rev==1))){//stop
+            if(start==1){
+               disable_interrupts(INT_TIMER2);
+               enable_interrupts(INT_TIMER1);
+               //output_low(pin_c3);//led start
+               start=0;
+               delay_ms(400);
+               pausa=1;
+               }
+         }
+         
+         while((input(pin_a4)==1)&&((cont==1)||(rev==1))){//start
+            if(start==0){
+               if((input(pin_b2)==1)){//rev
+                  if(pausa==0){
+                  direcao=1;
+                  reverso();
+                  tempo=(tempo*4)-4;
+                  output_low(pin_e0);
+   output_low(pin_e1);//led 30
+   output_low(pin_e2);//led 45
+   output_low(pin_c0);//led 60
+   output_low(pin_c1);//led 120
+   output_low(pin_c2);//led 180
+                  }
+               cont=1;
+               output_high(pin_d0);//habilita drive
+               output_low(pin_d1);//direcao 1
+               output_low(pin_d3);//direção 2
+               enable_interrupts(INT_TIMER2);
+               disable_interrupts(INT_TIMER1);
+               output_high(pin_c3);//led start
+               start=1;
+               delay_ms(400);
+               }
+               
+               else{
+               cont=1;
+               output_high(pin_d0);//habilita drive
+               output_high(pin_d1);//direcao 1
+               output_high(pin_d3);//direção 2
+               enable_interrupts(INT_TIMER2);
+               disable_interrupts(INT_TIMER1);
+               output_high(pin_c3);//led start
+               start=1;
+               tempo=(tempo*4)-4;//tempo=(tempo*2)+5;
+               delay_ms(400);
+               }
+            }
+         } 
+                                
+         if(input(pin_a5)==1){//reset
+         disable_interrupts(INT_TIMER1);
+         disable_interrupts(INT_TIMER2);
+         cont=0;
+         tempo=0;
+         pisca=0;
+         f_pisca=0; 
+         output_low(pin_e0);//led 15
+         output_low(pin_e1);//led 30
+         output_low(pin_e2);//led 45
+         zera();
+         output_low(pin_c3);//led start
+         pausa=0; 
+         reset_cpu();
+         }
+            
+      }
+   // FIM DO PROGRAMA
+}
+

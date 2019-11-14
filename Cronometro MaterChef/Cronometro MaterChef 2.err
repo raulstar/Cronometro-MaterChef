@@ -1,0 +1,8 @@
+>>> Warning 216 "Cronometro MaterChef 2.c" Line 182(0,1): Interrupts disabled during call to prevent re-entrancy:  (zera)
+>>> Warning 202 "Cronometro MaterChef 2.c" Line 40(5,12): Variable never used:   flag_15
+>>> Warning 202 "Cronometro MaterChef 2.c" Line 41(5,14): Variable never used:   posiciona
+>>> Warning 202 "Cronometro MaterChef 2.c" Line 43(5,11): Variable never used:   pronto
+>>> Warning 202 "Cronometro MaterChef 2.c" Line 44(10,13): Variable never used:   pos
+>>> Warning 202 "Cronometro MaterChef 2.c" Line 75(13,20): Variable never used:   segundo
+      Memory usage:   ROM=4%      RAM=8% - 8%
+      0 Errors,  6 Warnings.

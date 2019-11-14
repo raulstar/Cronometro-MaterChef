@@ -1,0 +1,92 @@
+004-005 @READ_PROGRAM_MEMORY8.P1
+004     @WRITE_PROGRAM_MEMORY8.P2
+008     PSP_DATA
+015     CCP_1_LOW
+015-016 CCP_1
+016     CCP_1_HIGH
+01B     CCP_2_LOW
+01B-01C CCP_2
+01C     CCP_2_HIGH
+020     @INTERRUPT_AREA
+021     @INTERRUPT_AREA
+022     @INTERRUPT_AREA
+023     @INTERRUPT_AREA
+024     @INTERRUPT_AREA
+025     @INTERRUPT_AREA
+026     @INTERRUPT_AREA
+027     @INTERRUPT_AREA
+028-029 tempo
+02A     cont
+02B     sensor1
+02C     sensor2
+02D     start
+02E     direcao
+02F     teste
+030     rev
+031-032 aux
+033     pisca
+034     f_pisca
+035     pausa
+036-037 TIMER2_isr.acumulador
+038     TIMER2_isr.i
+039     acum
+03A     zera.@SCRATCH1
+03A     MAIN.@SCRATCH1
+03B     @delay_ms1.P1
+03B     MAIN.@SCRATCH2
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+07B     @SCRATCH
+07F     @INTERRUPT_AREA
+09C.6   C1OUT
+09C.7   C2OUT
+0FF     @INTERRUPT_AREA
+10D-10E @READ_PROGRAM_MEMORY8.P1
+10D-10E @WRITE_PROGRAM_MEMORY8.P2
+17F     @INTERRUPT_AREA
+1FF     @INTERRUPT_AREA
+27F     @INTERRUPT_AREA
+2FF     @INTERRUPT_AREA
+37F     @INTERRUPT_AREA
+3FF     @INTERRUPT_AREA
+
+ROM Allocation:
+0090  @delay_ms1
+00A5  zera
+00E0  reverso
+003E  TIMER1_isr
+0054  TIMER2_isr
+0107  MAIN
+0107  @cinit
+
+Project Directory:
+    C:\Users\autoraf\Desktop\AUTORAF\1-Projetos recentes\Cronometro MaterChef\
+
+Project Files:
+    Cronometro MaterChef 10.c
+    ..\..\..\..\..\..\Program Files (x86)\PICC\devices\16f877a.h
+
+Units:
+    C:\Users\autoraf\Desktop\AUTORAF\1-Projetos recentes\Cronometro MaterChef\Cronometro MaterChef 10.c (main)
+
+Compiler Settings:
+    Processor:      PIC16F877A
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    Errors:      Cronometro MaterChef 10.err
+    Ext Symbols: Cronometro MaterChef 10.esym
+    INHX8:       Cronometro MaterChef 10.hex
+    Symbols:     Cronometro MaterChef 10.sym
+    List:        Cronometro MaterChef 10.lst
+    Debug/COFF:  Cronometro MaterChef 10.cof
+    Project:     Cronometro MaterChef 10.PJT
+    Call Tree:   Cronometro MaterChef 10.tre
+    Statistics:  Cronometro MaterChef 10.sta

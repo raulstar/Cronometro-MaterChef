@@ -1,0 +1,26 @@
+ÀÄCronometro MaterChef 12
+   ÃÄMAIN  0/354  Ram=2
+   ³  ÃÄ??0??
+   ³  ÃÄzera  0/59  Ram=1
+   ³  ³  ÃÄ@delay_ms1  0/21  Ram=1
+   ³  ³  ÃÄ@delay_ms1  0/21  Ram=1
+   ³  ³  ÃÄ@delay_ms1  0/21  Ram=1
+   ³  ³  ÀÄ@delay_ms1  0/21  Ram=1
+   ³  ÃÄ@delay_ms1  0/21  Ram=1
+   ³  ÃÄ@delay_ms1  0/21  Ram=1
+   ³  ÃÄ@delay_ms1  0/21  Ram=1
+   ³  ÃÄ@delay_ms1  0/21  Ram=1
+   ³  ÃÄreverso  0/40  Ram=0
+   ³  ³  ÃÄ@delay_ms1  0/21  Ram=1
+   ³  ³  ÃÄ@delay_ms1  0/21  Ram=1
+   ³  ³  ÃÄ@delay_ms1  0/21  Ram=1
+   ³  ³  ÀÄ@delay_ms1  0/21  Ram=1
+   ³  ÃÄ@delay_ms1  0/21  Ram=1
+   ³  ÃÄ@delay_ms1  0/21  Ram=1
+   ³  ÀÄzera  0/59  Ram=1
+   ³     ÃÄ@delay_ms1  0/21  Ram=1
+   ³     ÃÄ@delay_ms1  0/21  Ram=1
+   ³     ÃÄ@delay_ms1  0/21  Ram=1
+   ³     ÀÄ@delay_ms1  0/21  Ram=1
+   ÃÄTIMER1_isr  0/22  Ram=0
+   ÀÄTIMER2_isr  0/60  Ram=0
